@@ -11,21 +11,13 @@ const Footer = () => {
           <p className='w-full md:w-2/3 text-gray-600'>Our shopping cart website offers a seamless and user-friendly experience for online shoppers. With an intuitive interface,add items to their cart, and manage their purchases with ease. The website provides real-time updates on stock availability, offers multiple payment options, and includes features like product filtering, wishlist, and secure checkout.</p>
         </div>
 
-        <div>
-          <p className='text-xl font-medium mb-5'>COMPANY</p>
-          <ul className='flex flex-col gap-1 text-gray-600'>
-            {/* <li onClick={()=> navigate('/')}>Home</li>
-            <li  onClick={()=> navigate('/about')}>About us</li>
-            <li>Delivery</li>
-            <li>Privacy policy</li> */}
-          </ul>
-        </div>
+  
 
         <div>
           <p className='text-xl font-medium mb-5'>GET IN TOUCH</p>
           <ul className='flex flex-col gap-1 text-gray-600'>
-            <li>+1-212-456-7890</li>
-            <li>Contact@foreveryou.com</li>
+            <li>+91 6282500918</li>
+            <li>nihalchollampat@gmail.com</li>
           </ul>
         </div>
 
