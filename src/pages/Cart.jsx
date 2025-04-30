@@ -9,7 +9,7 @@ const Cart = () => {
   const { products, currency, navigate, cartItems, updateQuantity } = useContext(ShopContext);
 
   const [cartData, setCartData] = useState([]);
-  const carts_value = 99 
+  
   useEffect(() => {
     const tempData = []
     for (const items in cartItems) {
