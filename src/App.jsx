@@ -14,8 +14,20 @@ import Orders from './pages/Orders'
 import SearchBar from './components/SearchBar'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './watermark.css';
+const encryptedWatermark = "TWFkZSBCeSBOSUhBTCBD"; // base64 encoded 
+
+function decryptBase64(encoded) {
+  try {
+    return atob(encoded);
+  } catch (e) {
+    return "";
+  }
+}
 
 const App = () => {
+  const watermarkText = decryptBase64(encryptedWatermark);
+
   return (
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
       <ToastContainer />
@@ -33,6 +45,7 @@ const App = () => {
         <Route path='/orders' element={<Orders />} />
       </Routes>
       <Footer />
+      <div className="fixed-watermark">{watermarkText}</div>
     </div>
   )
 }
