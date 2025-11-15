@@ -29,7 +29,7 @@ const App = () => {
   const watermarkText = decryptBase64(encryptedWatermark);
 
   return (
-    <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+    <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] max-w-screen-xl mx-auto'>
       <ToastContainer />
       <Navbar />
       <SearchBar />
