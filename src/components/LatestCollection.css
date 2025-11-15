@@ -12,7 +12,7 @@
   width: 75%;
   margin: 0 auto;
   font-size: 12px;
-  color: #4B5563; /* text-gray-600 */
+  color: #4B5563; 
 }
 
 @media (min-width: 640px) {

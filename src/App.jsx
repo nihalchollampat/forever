@@ -16,7 +16,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './watermark.css';
 import ShopContextProvider from './context/ShopContext';
-const encryptedWatermark = "TWFkZSBCeSBOSUhBTCBD"; // base64 encoded 
+const encryptedWatermark = "TWFkZSBCeSBOSUhBTCBD"; // base64 encoded for the watermark i added
 
 function decryptBase64(encoded) {
   try {

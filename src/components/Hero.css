@@ -1,7 +1,7 @@
 .hero {
   display: flex;
   flex-direction: column;
-  border: 1px solid #9CA3AF; /* border-gray-400 */
+  border: 1px solid #9CA3AF; 
 }
 
 @media (min-width: 640px) {

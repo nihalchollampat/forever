@@ -16,5 +16,4 @@ const NewsletterBox = () => {
     </div>
   )
 }
-
 export default NewsletterBox

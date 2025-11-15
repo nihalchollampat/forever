@@ -6,7 +6,7 @@
   text-align: center;
   padding: 20px 0;
   font-size: 12px;
-  color: #374151; /* text-gray-700 */
+  color: #374151; 
 }
 
 @media (min-width: 640px) {
@@ -33,5 +33,5 @@
 }
 
 .policy-item p:last-of-type {
-  color: #9CA3AF; /* text-gray-400 */
+  color: #9CA3AF;
 }

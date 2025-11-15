@@ -2,7 +2,7 @@
   font-size: 24px;
   text-align: center;
   padding-top: 32px;
-  border-top: 1px solid #D1D5DB; /* default border */
+  border-top: 1px solid #D1D5DB; 
 }
 
 .about-content {
@@ -28,7 +28,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 24px;
-  color: #4B5563; /* text-gray-600 */
+  color: #4B5563; 
 }
 
 @media (min-width: 768px) {
@@ -39,7 +39,7 @@
 
 .about-mission {
   font-weight: bold;
-  color: #1F2937; /* text-gray-800 */
+  color: #1F2937; 
 }
 
 .about-why-title {
@@ -61,7 +61,7 @@
 }
 
 .about-why-item {
-  border: 1px solid #D1D5DB; /* border */
+  border: 1px solid #D1D5DB; 
   padding: 32px 40px;
   display: flex;
   flex-direction: column;
@@ -79,5 +79,5 @@
 }
 
 .about-why-item p {
-  color: #4B5563; /* text-gray-600 */
+  color: #4B5563; 
 }

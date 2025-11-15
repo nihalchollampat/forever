@@ -24,7 +24,7 @@
 
 .footer-description {
   width: 100%;
-  color: #4B5563; /* text-gray-600 */
+  color: #4B5563; 
 }
 
 @media (min-width: 768px) {

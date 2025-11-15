@@ -1,7 +1,7 @@
 .search-bar {
-  border-top: 1px solid #D1D5DB; /* border-t border-b */
+  border-top: 1px solid #D1D5DB; 
   border-bottom: 1px solid #D1D5DB;
-  background-color: #F9FAFB; /* bg-gray-50 */
+  background-color: #F9FAFB; 
   text-align: center;
 }
 
@@ -9,7 +9,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #9CA3AF; /* border border-gray-400 */
+  border: 1px solid #9CA3AF; 
   padding: 8px 20px;
   margin: 20px 12px;
   border-radius: 9999px;

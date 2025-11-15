@@ -22,7 +22,7 @@
 .cart-total-row hr {
   width: 100%;
   border: none;
-  border-top: 1px solid #E5E7EB; /* default hr */
+  border-top: 1px solid #E5E7EB; 
   margin: 8px 0;
 }
 

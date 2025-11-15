@@ -5,11 +5,11 @@
 .newsletter-title {
   font-size: 24px;
   font-weight: 500;
-  color: #1F2937; /* text-gray-800 */
+  color: #1F2937;
 }
 
 .newsletter-description {
-  color: #9CA3AF; /* text-gray-400 */
+  color: #9CA3AF; 
   margin-top: 12px;
 }
 
@@ -19,7 +19,7 @@
   align-items: center;
   gap: 12px;
   margin: 24px auto 0;
-  border: 1px solid #D1D5DB; /* default border */
+  border: 1px solid #D1D5DB; 
   padding-left: 12px;
 }
 
@@ -41,8 +41,8 @@
 }
 
 .newsletter-button {
-  background-color: #000000; /* bg-black */
-  color: #FFFFFF; /* text-white */
+  background-color: #000000; 
+  color: #FFFFFF; 
   font-size: 12px;
   padding: 16px 40px;
   border: none;
