@@ -1,0 +1,31 @@
+.product-item {
+  color: #374151; /* text-gray-700 */
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.product-item .image-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.product-item img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-item img:hover {
+  transform: scale(1.1);
+}
+
+.product-item p:first-of-type {
+  padding-top: 12px;
+  padding-bottom: 4px;
+  font-size: 14px;
+}
+
+.product-item p:last-of-type {
+  font-size: 14px;
+  font-weight: 500;
+}
