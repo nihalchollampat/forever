@@ -21,7 +21,7 @@ const LatestCollection = () => {
         <div className='latest-collection'>
             <div className='latest-collection-title'>
                 <Title text1={"LATEST"} text2={"COLLECTIONS"} />
-                <p className='latest-collection-description'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the.</p>
+                <p className='latest-collection-description'>Forever Ecommerce Website for all your clothing needs.</p>
             </div>
 
             {/* Rendering Products */}

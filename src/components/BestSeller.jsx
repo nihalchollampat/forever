@@ -20,7 +20,7 @@ const BestSeller = () => {
         <div className='best-seller'>
             <div className='best-seller-title'>
                 <Title text1={"BEST"} text2={"SELLERS"} />
-                <p className='best-seller-description'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the.</p>
+                <p className='best-seller-description'>Forever Ecommerce Website for all your clothing needs.</p>
             </div>
 
             <div className='best-seller-grid'>
