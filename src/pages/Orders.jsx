@@ -2,13 +2,14 @@
 import React, { useContext } from 'react';
 import { ShopContext } from '../context/ShopContext';
 import Title from '../components/Title';
+import './Orders.css';
 
 const Orders = () => {
   const { products, currency, cartData } = useContext(ShopContext);
 
   return (
-    <div className='border-t pt-16'>
-      <div className='text-2xl'>
+    <div className='orders-container'>
+      <div className='orders-title'>
         <Title text1={'MY'} text2={'ORDERS'} />
       </div>
 
@@ -16,25 +17,25 @@ const Orders = () => {
         {cartData.map((item, index) => {
           const productData = products.find((product) => product._id === item._id);
           return (
-            <div key={index} className='py-4 border-t border-b text-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4'>
-              <div className='flex items-start gap-6 text-sm'>
-                <img className='w-16 sm:w-20' src={productData.image[0]} alt="" />
-                <div>
-                  <p className='sm:text-base font-medium'>{productData.name}</p>
-                  <div className='flex items-center gap-3 mt-2 text-base text-gray-700'>
-                    <p className='text-lg'>{currency}{productData.price}</p>
-                    <p>Quantity: {item.quantity}</p>
-                    <p>Size: {item.size}</p>
+            <div key={index} className='order-item'>
+              <div className='order-details'>
+                <img className='order-image' src={productData.image[0]} alt="" />
+                <div className='order-info'>
+                  <p className='order-name'>{productData.name}</p>
+                  <div className='order-meta'>
+                    <p className='order-price'>{currency}{productData.price}</p>
+                    <p className='order-quantity'>Quantity: {item.quantity}</p>
+                    <p className='order-size'>Size: {item.size}</p>
                   </div>
-                  <p className='mt-2'>Date: <span className='text-gray-400'>25, May, 2024</span></p>
+                  <p className='order-date'>Date: <span>25, May, 2024</span></p>
                 </div>
               </div>
-              <div className='md:w-1/2 flex justify-between'>
+              <div className='order-status'>
                 <div className='flex items-center gap-2'>
-                  <p className='min-w-2 h-2 rounded-full bg-green-500'></p>
-                  <p className='text-sm md:text-base'>Ready to ship</p>
+                  <p className='status-indicator'></p>
+                  <p className='status-text'>Ready to ship</p>
                 </div>
-                <button className='border px-4 py-2 text-sm font-medium rounded-sm'>Track Order</button>
+                <button className='track-button'>Track Order</button>
               </div>
             </div>
           );

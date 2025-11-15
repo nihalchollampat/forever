@@ -5,29 +5,30 @@ import { ShopContext } from '../context/ShopContext';
 import { assets } from '../assets/assets';
 import CartTotal from '../components/CartTotal';
 import { useNavigate } from 'react-router-dom';
+import './Cart.css';
 
 const Cart = () => {
   const { products, currency, cartData, updateQuantity } = useContext(ShopContext);
   const navigate = useNavigate();
 
   return (
-    <div className='border-t pt-14'>
-      <div className='text-2xl mb-3'>
+    <div className='cart'>
+      <div className='cart-title'>
         <Title text1={'YOUR'} text2={'CART'} />
       </div>
 
-      <div>
+      <div className='cart-items'>
         {cartData.map((item, index) => {
           const productData = products.find((product) => product._id === item._id);
           return (
-            <div key={index} className='py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4'>
-              <div className='flex items-start gap-6'>
-                <img className='w-16 sm:w-20' src={productData.image[0]} alt="" />
-                <div>
-                  <p className='text-xs sm:text-lg font-medium'>{productData.name}</p>
-                  <div className='flex items-center gap-5 mt-2'>
+            <div key={index} className='cart-item'>
+              <div className='cart-item-content'>
+                <img className='cart-item-image' src={productData.image[0]} alt="" />
+                <div className='cart-item-details'>
+                  <p className='cart-item-name'>{productData.name}</p>
+                  <div className='cart-item-price-size'>
                     <p>{currency}{productData.price}</p>
-                    <p className='px-2 sm:px-3 sm:py-1 border bg-slate-50'>{item.size}</p>
+                    <p className='cart-item-size'>{item.size}</p>
                   </div>
                 </div>
               </div>
@@ -37,14 +38,14 @@ const Cart = () => {
                     ? null
                     : updateQuantity(item._id, item.size, Number(e.target.value))
                 }
-                className='border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1'
+                className='cart-item-quantity'
                 type='number'
                 min={1}
                 defaultValue={item.quantity}
               />
               <img
                 onClick={() => updateQuantity(item._id, item.size, 0)}
-                className='w-4 mr-4 sm:w-5 cursor-pointer'
+                className='cart-item-remove'
                 src={assets.bin_icon}
                 alt=""
               />
@@ -53,11 +54,11 @@ const Cart = () => {
         })}
       </div>
 
-      <div className='flex justify-end my-20'>
-        <div className='w-full sm:w-[450px]'>
+      <div className='cart-total-section'>
+        <div className='cart-total-container'>
           <CartTotal />
-          <div className='w-full text-end'>
-            <button onClick={() => navigate('/place-order')} className='bg-black text-white text-sm my-8 px-8 py-3'>
+          <div className='cart-checkout-button'>
+            <button onClick={() => navigate('/place-order')} className='cart-checkout-btn'>
               PROCEED TO CHECKOUT
             </button>
           </div>
