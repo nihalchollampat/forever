@@ -1,8 +1,9 @@
 // src/context/ShopContext.js
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { products } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { supabase } from "../lib/supabase";
 
 export const ShopContext = createContext();
 
@@ -14,6 +15,69 @@ const ShopContextProvider = (props) => {
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const getSession = async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            setUser(session?.user ?? null);
+            setLoading(false);
+        };
+
+        getSession();
+
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user ?? null);
+            setLoading(false);
+        });
+
+        return () => subscription.unsubscribe();
+    }, []);
+
+    const signUp = async (email, password, name) => {
+        setLoading(true);
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    name: name,
+                }
+            }
+        });
+        if (error) {
+            toast.error(error.message);
+        } else {
+            toast.success('Account created successfully! Please check your email to verify.');
+        }
+        setLoading(false);
+        return { data, error };
+    };
+
+    const signIn = async (email, password) => {
+        setLoading(true);
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        });
+        if (error) {
+            toast.error(error.message);
+        } else {
+            toast.success('Logged in successfully!');
+        }
+        setLoading(false);
+        return { data, error };
+    };
+
+    const signOut = async () => {
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+            toast.error(error.message);
+        } else {
+            toast.success('Logged out successfully!');
+        }
+    };
 
     const addToCart = async (itemId, size) => {
         if (!size) {
@@ -98,6 +162,11 @@ const ShopContextProvider = (props) => {
         getCartCount,
         getCartAmount,
         cartData, // 👈 now shared
+        user,
+        loading,
+        signUp,
+        signIn,
+        signOut,
     };
 
     return (

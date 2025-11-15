@@ -8,7 +8,7 @@ const Navbar = () => {
 
     const [visible, setVisble] = useState(false)
 
-    const { setShowSearch, navigate, getCartCount } = useContext(ShopContext);
+    const { setShowSearch, navigate, getCartCount, user, signOut } = useContext(ShopContext);
 
     return (
         <div className='navbar' >
@@ -37,14 +37,14 @@ const Navbar = () => {
             <div className='navbar-actions'>
                 <img onClick={() => { setShowSearch(true); navigate('/collection') }} className='navbar-search' src={assets.search_icon} alt="" />
                 <div className='navbar-profile'>
-                    <img onClick={() => { navigate('/login') }} className='navbar-profile-icon' src={assets.profile_icon} alt="" />
+                    <img onClick={() => { user ? null : navigate('/login') }} className='navbar-profile-icon' src={assets.profile_icon} alt="" />
 
                     {/* Dropdown Menu */}
-                    <div className='navbar-dropdown'>
+                    {user && <div className='navbar-dropdown'>
                         <p onClick={() => { }} className='navbar-dropdown-item'>My Profile</p>
                         <p onClick={() => navigate('/orders')} className='navbar-dropdown-item'>Orders</p>
-                        <p onClick={() => { }} className='navbar-dropdown-item'>Logout</p>
-                    </div>
+                        <p onClick={() => signOut()} className='navbar-dropdown-item'>Logout</p>
+                    </div>}
                 </div>
                 <Link to='/cart' className='navbar-cart'>
                     <img className='navbar-cart-icon' src={assets.cart_icon} alt="" />

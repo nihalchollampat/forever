@@ -7,11 +7,6 @@
   font-size: 24px;
   margin-bottom: 12px;
 }
-
-.cart-items {
-  /* No specific styles, uses default */
-}
-
 .cart-item {
   padding: 16px 0;
   border-top: 1px solid #D1D5DB;
@@ -43,10 +38,6 @@
   .cart-item-image {
     width: 80px;
   }
-}
-
-.cart-item-details {
-  /* No specific styles */
 }
 
 .cart-item-name {
