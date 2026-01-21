@@ -1,0 +1,31 @@
+.cart-total {
+  width: 100%;
+}
+
+.cart-total-title {
+  font-size: 24px;
+}
+
+.cart-total-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-total-row hr {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #E5E7EB; 
+  margin: 8px 0;
+}
+
+.cart-total-row b {
+  font-weight: bold;
+}

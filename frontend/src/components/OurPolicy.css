@@ -1,0 +1,37 @@
+.our-policy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 12px;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 12px;
+  color: #374151; 
+}
+
+@media (min-width: 640px) {
+  .our-policy {
+    flex-direction: row;
+    gap: 2px;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  .our-policy {
+    font-size: 16px;
+  }
+}
+
+.policy-item img {
+  width: 48px;
+  margin: 0 auto 20px;
+}
+
+.policy-item p:first-of-type {
+  font-weight: 600;
+}
+
+.policy-item p:last-of-type {
+  color: #9CA3AF;
+}

@@ -1,0 +1,167 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  font-weight: 500;
+}
+
+.navbar-logo {
+  width: 144px;
+}
+
+.navbar-menu {
+  display: none;
+  gap: 20px;
+  font-size: 14px;
+  color: #374151; 
+}
+
+@media (min-width: 640px) {
+  .navbar-menu {
+    display: flex;
+  }
+}
+
+.navbar-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar-link hr {
+  width: 50%;
+  border: none;
+  height: 1.5px;
+  background-color: #374151; 
+  display: none;
+}
+
+.navbar-link.active hr {
+  display: block;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navbar-search {
+  width: 20px;
+  cursor: pointer;
+}
+
+.navbar-profile {
+  position: relative;
+}
+
+.navbar-profile-icon {
+  width: 20px;
+  cursor: pointer;
+}
+
+.navbar-dropdown {
+  position: absolute;
+  right: 0;
+  top: 16px;
+  display: none;
+  width: 144px;
+  padding: 12px 20px;
+  background-color: #F1F5F9; 
+  color: #6B7280; 
+  border-radius: 4px;
+}
+
+.navbar-profile:hover .navbar-dropdown {
+  display: block;
+}
+
+.navbar-dropdown-item {
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.navbar-dropdown-item:hover {
+  color: #000000; 
+}
+
+.navbar-cart {
+  position: relative;
+  text-decoration: none;
+}
+
+.navbar-cart-icon {
+  width: 20px;
+  min-width: 20px;
+}
+
+.navbar-cart-count {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  width: 16px;
+  text-align: center;
+  line-height: 16px;
+  background-color: #000000; 
+  color: #FFFFFF; 
+  border-radius: 50%;
+  font-size: 8px;
+  aspect-ratio: 1;
+}
+
+.navbar-menu-icon {
+  width: 20px;
+  cursor: pointer;
+  display: block;
+}
+
+@media (min-width: 640px) {
+  .navbar-menu-icon {
+    display: none;
+  }
+}
+
+.navbar-sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background-color: #FFFFFF; 
+  transition: width 0.3s ease;
+  width: 0;
+}
+
+.navbar-sidebar.open {
+  width: 100%;
+}
+
+.navbar-sidebar-content {
+  display: flex;
+  flex-direction: column;
+  color: #4B5563; 
+}
+
+.navbar-sidebar-back {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.navbar-sidebar-back img {
+  height: 16px;
+  transform: rotate(180deg);
+}
+
+.navbar-sidebar-link {
+  padding: 8px 24px;
+  border-bottom: 1px solid #D1D5DB; 
+  text-decoration: none;
+  color: inherit;
+}
