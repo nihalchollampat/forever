@@ -7,7 +7,7 @@ import './BestSeller.css'
 const BestSeller = () => {
 
     const [bestSeller, setBestSeller] = useState([])
-    const { products } = useContext(ShopContext)
+    const { products, productsLoading } = useContext(ShopContext)
 
     useEffect(() => {
 
@@ -25,9 +25,15 @@ const BestSeller = () => {
 
             <div className='best-seller-grid'>
                 {
-                    bestSeller.map((item, index) => (
-                        <ProductItem key={index} id={item._id} image={item.image} name={item.name} price={item.price} />
-                    ))
+                    productsLoading ? (
+                        <p style={{ textAlign: 'center', width: '100%', padding: '2rem' }}>Loading bestsellers...</p>
+                    ) : bestSeller.length > 0 ? (
+                        bestSeller.map((item, index) => (
+                            <ProductItem key={index} id={item._id} image={item.image} name={item.name} price={item.price} />
+                        ))
+                    ) : (
+                        <p style={{ textAlign: 'center', width: '100%', padding: '2rem' }}>No bestsellers available</p>
+                    )
                 }
             </div>
         </div>
