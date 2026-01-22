@@ -51,10 +51,13 @@ const ShopContextProvider = (props) => {
             try {
                 const response = await productAPI.getAll();
                 if (response.success) {
+                    // Get image URL from environment variable or use localhost as fallback
+                    const IMAGE_URL = import.meta.env.VITE_IMAGE_URL || 'http://localhost:5001';
+                    
                     // Transform image paths to include backend URL
                     const productsWithImages = response.products.map(product => ({
                         ...product,
-                        image: product.image.map(img => `http://localhost:5001/uploads/${img}`)
+                        image: product.image.map(img => `${IMAGE_URL}/uploads/${img}`)
                     }));
                     setProducts(productsWithImages);
                 }
