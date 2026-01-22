@@ -7,7 +7,7 @@ import './Collection.css'
 
 const Collection = () => {
 
-  const { products, search, showSearch } = useContext(ShopContext);
+  const { products, productsLoading, search, showSearch } = useContext(ShopContext);
 
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -76,6 +76,13 @@ const Collection = () => {
 
   }
 
+  // Initialize filter when products load
+  useEffect(() => {
+    if (products.length > 0) {
+      applyFilter()
+    }
+  }, [products])
+
   useEffect(() => {
     applyFilter()
   }, [category, subCategory, search, showSearch])
@@ -131,9 +138,15 @@ const Collection = () => {
         {/* Map Products */}
         <div className='product-grid'>
           {
-            filterProducts.map((item, index) => (
-              <ProductItem key={index} id={item._id} image={item.image} name={item.name} price={item.price} />
-            ))
+            productsLoading ? (
+              <p style={{ textAlign: 'center', width: '100%', padding: '2rem' }}>Loading products...</p>
+            ) : filterProducts.length > 0 ? (
+              filterProducts.map((item, index) => (
+                <ProductItem key={index} id={item._id} image={item.image} name={item.name} price={item.price} />
+              ))
+            ) : (
+              <p style={{ textAlign: 'center', width: '100%', padding: '2rem' }}>No products found</p>
+            )
           }
         </div>
       </div>

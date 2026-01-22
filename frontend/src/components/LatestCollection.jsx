@@ -7,7 +7,7 @@ import './LatestCollection.css'
 const LatestCollection = () => {
 
     const [latestProducts, setLatestProducts] = useState([])
-    const { products } = useContext(ShopContext)
+    const { products, productsLoading } = useContext(ShopContext)
 
     useEffect(() => {
 
@@ -27,9 +27,15 @@ const LatestCollection = () => {
             {/* Rendering Products */}
             <div className='latest-collection-grid'>
                 {
-                    latestProducts.map((item, index) => (
-                        <ProductItem key={index} id={item._id} image={item.image} name={item.name} price={item.price} />
-                    ))
+                    productsLoading ? (
+                        <p style={{ textAlign: 'center', width: '100%', padding: '2rem' }}>Loading products...</p>
+                    ) : latestProducts.length > 0 ? (
+                        latestProducts.map((item, index) => (
+                            <ProductItem key={index} id={item._id} image={item.image} name={item.name} price={item.price} />
+                        ))
+                    ) : (
+                        <p style={{ textAlign: 'center', width: '100%', padding: '2rem' }}>No products available</p>
+                    )
                 }
             </div>
 

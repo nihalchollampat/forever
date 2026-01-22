@@ -1,9 +1,8 @@
 // src/context/ShopContext.js
 import { createContext, useState, useEffect } from "react";
-import { products } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { supabase } from "../lib/supabase";
+import { authAPI, productAPI } from "../lib/api";
 
 export const ShopContext = createContext();
 
@@ -14,68 +13,119 @@ const ShopContextProvider = (props) => {
 
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
-    const [cartItems, setCartItems] = useState({});
+
+    // Initialize cart from localStorage
+    const [cartItems, setCartItems] = useState(() => {
+        const savedCart = localStorage.getItem('cartItems');
+        return savedCart ? JSON.parse(savedCart) : {};
+    });
+
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [products, setProducts] = useState([]);
+    const [productsLoading, setProductsLoading] = useState(true);
 
     useEffect(() => {
         const getSession = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
-            setUser(session?.user ?? null);
-            setLoading(false);
+            try {
+                const response = await authAPI.getSession();
+                if (response.success && response.user) {
+                    setUser(response.user);
+                } else {
+                    setUser(null);
+                }
+            } catch (error) {
+                console.error('Session error:', error);
+                setUser(null);
+            } finally {
+                setLoading(false);
+            }
         };
 
         getSession();
-
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-            setUser(session?.user ?? null);
-            setLoading(false);
-        });
-
-        return () => subscription.unsubscribe();
     }, []);
+
+    // Fetch products from API
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await productAPI.getAll();
+                if (response.success) {
+                    // Transform image paths to include backend URL
+                    const productsWithImages = response.products.map(product => ({
+                        ...product,
+                        image: product.image.map(img => `http://localhost:5001/uploads/${img}`)
+                    }));
+                    setProducts(productsWithImages);
+                }
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                toast.error('Failed to load products');
+            } finally {
+                setProductsLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
+    // Save cart to localStorage whenever it changes
+    useEffect(() => {
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }, [cartItems]);
 
     const signUp = async (email, password, name) => {
         setLoading(true);
-        const { data, error } = await supabase.auth.signUp({
-            email,
-            password,
-            options: {
-                data: {
-                    name: name,
-                }
+        try {
+            const response = await authAPI.signup(email, password, name);
+            if (response.success) {
+                setUser(response.user);
+                toast.success(response.message || 'Account created successfully!');
+                return { data: response, error: null };
+            } else {
+                toast.error(response.message || 'Failed to create account');
+                return { data: null, error: { message: response.message } };
             }
-        });
-        if (error) {
-            toast.error(error.message);
-        } else {
-            toast.success('Account created successfully! Please check your email to verify.');
+        } catch (error) {
+            const errorMessage = error.response?.data?.message || 'Error creating account';
+            toast.error(errorMessage);
+            return { data: null, error: { message: errorMessage } };
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
-        return { data, error };
     };
 
     const signIn = async (email, password) => {
         setLoading(true);
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email,
-            password,
-        });
-        if (error) {
-            toast.error(error.message);
-        } else {
-            toast.success('Logged in successfully!');
+        try {
+            const response = await authAPI.login(email, password);
+            if (response.success) {
+                setUser(response.user);
+                toast.success(response.message || 'Logged in successfully!');
+                return { data: response, error: null };
+            } else {
+                toast.error(response.message || 'Failed to login');
+                return { data: null, error: { message: response.message } };
+            }
+        } catch (error) {
+            const errorMessage = error.response?.data?.message || 'Error logging in';
+            toast.error(errorMessage);
+            return { data: null, error: { message: errorMessage } };
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
-        return { data, error };
     };
 
     const signOut = async () => {
-        const { error } = await supabase.auth.signOut();
-        if (error) {
-            toast.error(error.message);
-        } else {
-            toast.success('Logged out successfully!');
+        try {
+            const response = await authAPI.logout();
+            setUser(null);
+            setCartItems({}); // Clear cart on logout
+            localStorage.removeItem('cartItems'); // Clear cart from localStorage
+            toast.success(response.message || 'Logged out successfully!');
+        } catch (error) {
+            const errorMessage = error.response?.data?.message || 'Error logging out';
+            toast.error(errorMessage);
         }
     };
 
@@ -115,7 +165,7 @@ const ShopContextProvider = (props) => {
                     if (cartItems[items][item] > 0) {
                         totalCount += cartItems[items][item];
                     }
-                } catch (error) {}
+                } catch (error) { }
             }
         }
         return totalCount;
@@ -130,7 +180,7 @@ const ShopContextProvider = (props) => {
                     if (cartItems[items][item] > 0) {
                         totalAmount += itemInfo.price * cartItems[items][item];
                     }
-                } catch (error) {}
+                } catch (error) { }
             }
         }
         return totalAmount;
@@ -151,6 +201,7 @@ const ShopContextProvider = (props) => {
         currency,
         delivery_fee,
         products,
+        productsLoading,
         navigate,
         search,
         setSearch,
