@@ -178,9 +178,12 @@ const ShopContextProvider = (props) => {
             for (const item in cartItems[items]) {
                 try {
                     if (cartItems[items][item] > 0) {
-                        totalAmount += itemInfo.price * cartItems[items][item];
+                        if (itemInfo) {
+                            totalAmount += itemInfo.price * cartItems[items][item];
+                        }
                     }
                 } catch (error) { }
+
             }
         }
         return totalAmount;
@@ -228,4 +231,3 @@ const ShopContextProvider = (props) => {
 };
 
 export default ShopContextProvider;
-//sugfhdj
